@@ -1,7 +1,27 @@
+require('dotenv').config();
+
 const Listing   = require("../models/listing");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const accessToken = process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({ accessToken: accessToken });
+const accessToken = process.env.MAPBOX_TOKEN || "pk.eyJ1IjoiYWJoaS0zMDAzIiwiYSI6ImNtOWlzbmZ1cDAzNHIybXBtZjJyYTFlcGkifQ.X0HJm0iUOVlNwKi0I0-OZg";
+const mapbox = require('@mapbox/mapbox-sdk');
+
+const geocodingClient = mbxGeocoding({ accessToken });
+const mapboxClient = mapbox({ accessToken });
+
+console.log("Mapbox Token:", process.env.MAPBOX_TOKEN);
+
+// Example usage
+async function geocodeLocation(location) {
+    try {
+        const response = await mapboxClient.forwardGeocode({
+            query: location,
+            limit: 1
+        }).send();
+        return response.body.features[0].geometry.coordinates;
+    } catch (err) {
+        console.error("Error with Mapbox Geocoding:", err);
+    }
+}
 
 module.exports.index = async (req, res) => {
     

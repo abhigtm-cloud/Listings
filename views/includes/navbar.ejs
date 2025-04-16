@@ -8,8 +8,6 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" aria-current="page" href="/listings">Explore</a>
-
-         
         </div>
 
         <div class="navbar-nav ms-auto">
@@ -20,14 +18,13 @@
           </form>
         </div> 
 
-
         <div class="navbar-nav ms-auto">
           <a class="nav-link" href="/listings/new">Airbnb your home</a>
-          <% if(!currentUser) { %>
-          <a class="nav-link" aria-current="page" href="/signup"><B>Sign Up</B></a>
+          <% if (!currentUser) { %>
+          <a class="nav-link" aria-current="page" href="/signup"><b>Sign Up</b></a>
           <a class="nav-link" href="/login"><b>Login</b></a>
           <% } %>
-          <% if(currentUser) { %>
+          <% if (currentUser) { %>
           <a class="nav-link" href="/logout"><b>Logout</b></a>
           <% } %>
         </div>
